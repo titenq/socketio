@@ -22,6 +22,11 @@ app.use('/', (req, res) => {
 // recebendo o socket de cada cliente conectado
 io.on('connection', socket => {
   console.log(`Socket conectado com o id ${socket.id}`);
+
+  socket.on('sendMessage', data => {
+    let object = JSON.stringify(data);
+    console.log(`data: ${object}`);
+  });
 });
 
 // ouvindo a porta 3000
