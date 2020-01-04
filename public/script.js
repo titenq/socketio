@@ -27,7 +27,7 @@ $('#chat').submit(function(event) {
 
 // Função toggle do menu de opções nos ...
 $(document).ready(function(){
-  $('#action_menu_btn').click(function(){
-    $('.action_menu').toggle();
+  $('#actionMenuBtn').click(function(){
+    $('.action-menu').toggle();
   });
 });
