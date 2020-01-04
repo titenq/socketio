@@ -179,6 +179,7 @@ body, html {
   background-color: #82ccdd;
   padding: 10px;
   position: relative;
+  min-width: 110px;
 }
 
 .msg-container-send {
@@ -189,6 +190,7 @@ body, html {
   background-color: #78e08f;
   padding: 10px;
   position: relative;
+  min-width: 110px;
 }
 
 .msg-time {

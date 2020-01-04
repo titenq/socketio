@@ -19,6 +19,9 @@ app.use('/', (req, res) => {
   res.render('index.html')
 });
 
+// variável que vai receber as mensagens
+let messages = [];
+
 // recebendo o socket de cada cliente conectado
 io.on('connection', socket => {
   console.log(`Socket conectado com o id ${socket.id}`);
@@ -26,6 +29,11 @@ io.on('connection', socket => {
   socket.on('sendMessage', data => {
     let object = JSON.stringify(data);
     console.log(`data: ${object}`);
+
+    messages.push(data);
+    
+    // enviando a mensagem recebida para todos os clientes
+    socket.broadcast.emit('receivedMessage', data);
   });
 });
 
