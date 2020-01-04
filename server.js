@@ -19,5 +19,12 @@ app.use('/', (req, res) => {
   res.render('index.html')
 });
 
+// recebendo o socket de cada cliente conectado
+io.on('connection', socket => {
+  console.log(`Socket conectado com o id ${socket.id}`);
+});
+
 // ouvindo a porta 3000
-server.listen(3000);
+server.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000.');
+});
