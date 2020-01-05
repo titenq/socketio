@@ -26,6 +26,14 @@ function renderMessage(message) {
   } 
 };
 
+// Recebendo as mensagens anteriores já enviadas
+socket.on('previousMessage', function(messages) {
+  for (message of messages) {
+    console.log(message);
+    renderMessage(message);
+  }
+});
+
 // Recebendo a mensagem enviadas por todos os clientes
 socket.on('receivedMessage', function(message) {
   renderMessage(message);

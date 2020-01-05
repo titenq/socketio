@@ -26,10 +26,15 @@ let messages = [];
 io.on('connection', socket => {
   console.log(`Socket conectado com o id ${socket.id}`);
 
+  // adicionando as mensagens já enviadas para a variável messages
+  // para que um socket novo pegar as mensagens antigas
+  socket.emit('previousMessage', messages);
+
   socket.on('sendMessage', data => {
     let object = JSON.stringify(data);
     console.log(`data: ${object}`);
 
+    // adicionando a mensagem para a variável messages
     messages.push(data);
     
     // enviando a mensagem recebida para todos os clientes
