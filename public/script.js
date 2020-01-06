@@ -1,12 +1,16 @@
 // Para que o client se comunique com o socket.io
-let socket = io('http://localhost:3000');
+let socket = io('ws://localhost:3000');
+
+let nick = '';
+let avatar = '';
+let user = {};
 
 // Função para renderizar as mensagens na tela
 function renderMessage(message) {
-  if (message.author === socket.id) {
+  if (message.author === user.nick) {
     $('#appendDiv').append(`<div id="divStart" class="d-flex justify-content-start mb-4">
     <div class="img-cont-msg" id="avatarMe">
-      <img src="./assets/superman.jfif" class="rounded-circle user-img-msg">
+      <img src="${message.avatar}" class="rounded-circle user-img-msg">
     </div>
     <div id="msgContainer" class="msg-container">
       <div id="msgMe">${message.message}</div>
@@ -20,7 +24,7 @@ function renderMessage(message) {
       <span class="msg-time" id="msgTimeOther">${message.date}</span>
     </div>
     <div class="img-cont-msg" id="avatarOther">
-      <img src="./assets/wonderwoman.jfif" class="rounded-circle user-img-msg">
+      <img src="${message.avatar}" class="rounded-circle user-img-msg">
     </div>
   </div>`);
   } 
@@ -39,17 +43,39 @@ socket.on('receivedMessage', function(message) {
   renderMessage(message);
 });
 
+// Função para receber o apelido e avatar
+$('#formLogin').submit(function(event) {
+  event.preventDefault();
+  
+  nick = $('#nick').val();
+  avatar = $('input[name="avatar"]:checked').val();
+
+  if (avatar === undefined) {
+    avatar = './assets/avatars/001.png';
+  };
+
+  user = {
+    nick: nick,
+    avatar: avatar
+  };
+  
+  console.log(user);
+
+  $('#chatLogin').hide();
+  $('#chatRoom').show();
+});
+
 // Função para enviar a mensagem do chat para o socket.io
-$('#chat').submit(function(event) {
+$('#formChat').submit(function(event) {
   event.preventDefault();
   
   let message = $('#textareaMessage').val();
-  let author = socket.id;
   let now = dateFormatted();
   
   if (message.lenght || message !== "") {
     let messageObject = {
-      author: author,
+      author: nick,
+      avatar: avatar,
       message: message,
       date: now
     };
@@ -57,6 +83,10 @@ $('#chat').submit(function(event) {
     renderMessage(messageObject);
 
     socket.emit('sendMessage', messageObject);
+
+    $('#formChat').each (function() {
+      this.reset();
+    });
   }
 });
 

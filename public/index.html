@@ -15,178 +15,247 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
-    <title>Socket.io</title>
+    <title>Chat</title>
   </head>
   <body>
-    <div class="container-fluid h-100">
-      <div class="row justify-content-center h-100">
-        <div class="col-md-4 col-xl-3 chat">
-          <div class="card mb-sm-3 mb-md-0 contacts-card">
-            <div class="card-header">
-              <div class="input-group">
-                <input
-                  type="text"
-                  placeholder="Procurar..."
-                  name=""
-                  class="form-control search"
-                />
-                <div class="input-group-prepend">
-                  <span class="input-group-text search-btn"
-                    ><i class="fas fa-search"></i
-                  ></span>
+
+    <div id="chatLogin">
+      <div class="container-fluid h-100">
+        <div class="row justify-content-center h-100">
+            <div class="card-login mb-sm-3 mb-md-0 mt-5">
+              <div class="card-header">
+                <div class="input-group">
+                  <form id="formLogin">
+                    <span class="span-login mb-2">Digite o seu apelido:</span>
+                    <input type="text" 
+                      name="nick" 
+                      id="nick" 
+                      class="nick-login" 
+                      placeholder="Digite aqui..."
+                      minlength="3"
+                      maxlength="20"
+                      autofocus   
+                      autocomplete="off">
+                    <span class="span-login mt-4 mb-2">Clique no seu avatar:</span>
+                    <input type="radio" 
+                      name="avatar" 
+                      class="avatar"
+                      id="avatar001"
+                      value="./assets/avatars/001.png">
+                    <label for="avatar001">
+                      <img src="./assets/avatars/001.png" class="avatar-img">
+                    </label>
+
+                    <input type="radio" 
+                      name="avatar" 
+                      class="avatar"
+                      id="avatar002" 
+                      value="./assets/avatars/002.png">
+                    <label for="avatar002">
+                      <img src="./assets/avatars/002.png" class="avatar-img">
+                    </label>
+
+                    <input type="radio" 
+                      name="avatar" 
+                      class="avatar"
+                      id="avatar003" 
+                      value="./assets/avatars/003.png">
+                    <label for="avatar003">
+                      <img src="./assets/avatars/003.png" class="avatar-img">
+                    </label>
+
+                    <input type="radio" 
+                      name="avatar" 
+                      class="avatar"
+                      id="avatar004" 
+                      value="./assets/avatars/004.png">
+                    <label for="avatar004">
+                      <img src="./assets/avatars/004.png" class="avatar-img">
+                    </label>
+
+                    <input type="radio" 
+                      name="avatar" 
+                      class="avatar"
+                      id="avatar005" 
+                      value="./assets/avatars/005.png">
+                    <label for="avatar005">
+                      <img src="./assets/avatars/005.png" class="avatar-img">
+                    </label>
+
+                    <input type="radio" 
+                      name="avatar" 
+                      class="avatar"
+                      id="avatar006" 
+                      value="./assets/avatars/006.png">
+                    <label for="avatar006">
+                      <img src="./assets/avatars/006.png" class="avatar-img">
+                    </label>
+
+                    <div class="btn-login-container">
+                      <input type="submit" value="Entrar" class="btn-login mt-3 mb-2">
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
-            <div class="card-body contacts-body">
-              <ui class="contacts">
-                <li class="active">
-                  <div class="d-flex bd-highlight">
-                    <div class="img-cont">
-                      <img
-                        src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                        class="rounded-circle user-img"
-                      />
-                      <span class="online-icon"></span>
-                    </div>
-                    <div class="user-info">
-                      <span>Khalid</span>
-                      <p>Kalid is online</p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex bd-highlight">
-                    <div class="img-cont">
-                      <img
-                        src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg"
-                        class="rounded-circle user-img"
-                      />
-                      <span class="online-icon offline"></span>
-                    </div>
-                    <div class="user-info">
-                      <span>Taherah Big</span>
-                      <p>Taherah left 7 mins ago</p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex bd-highlight">
-                    <div class="img-cont">
-                      <img
-                        src="https://i.pinimg.com/originals/ac/b9/90/acb990190ca1ddbb9b20db303375bb58.jpg"
-                        class="rounded-circle user-img"
-                      />
-                      <span class="online-icon"></span>
-                    </div>
-                    <div class="user-info">
-                      <span>Sami Rafi</span>
-                      <p>Sami is online</p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex bd-highlight">
-                    <div class="img-cont">
-                      <img
-                        src="http://profilepicturesdp.com/wp-content/uploads/2018/07/sweet-girl-profile-pictures-9.jpg"
-                        class="rounded-circle user-img"
-                      />
-                      <span class="online-icon offline"></span>
-                    </div>
-                    <div class="user-info">
-                      <span>Nargis Hawa</span>
-                      <p>Nargis left 30 mins ago</p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex bd-highlight">
-                    <div class="img-cont">
-                      <img
-                        src="https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg"
-                        class="rounded-circle user-img"
-                      />
-                      <span class="online-icon offline"></span>
-                    </div>
-                    <div class="user-info">
-                      <span>Rashid Samim</span>
-                      <p>Rashid left 50 mins ago</p>
-                    </div>
-                  </div>
-                </li>
-              </ui>
-            </div>
-            <div class="card-footer"></div>
           </div>
         </div>
-        <div class="col-md-8 col-xl-6 chat">
-          <div class="card">
-            <div class="card-header msg-head">
-              <div class="d-flex bd-highlight">
-                <div class="img-cont">
-                  <img
-                    src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                    class="rounded-circle user-img"
-                  />
-                  <span class="online-icon"></span>
-                </div>
-                <div class="user-info">
-                  <span>Chat with Khalid</span>
-                  <p>1767 Messages</p>
-                </div>
-                <div class="video-cam">
-                  <span><i class="fas fa-video"></i></span>
-                  <span><i class="fas fa-phone"></i></span>
-                </div>
-              </div>
-              <span id="actionMenuBtn"
-                ><i class="fas fa-ellipsis-v"></i
-              ></span>
-              <div class="action-menu">
-                <ul>
-                  <li><i class="fas fa-user-circle"></i>Ver Perfil</li>
-                  <li><i class="fas fa-users"></i>Adicionar aos Amigos</li>
-                  <li><i class="fas fa-plus"></i>Adicionar ao Grupo</li>
-                  <li><i class="fas fa-ban"></i>Bloquear</li>
-                </ul>
-              </div>
-            </div>
-            <div class="card-body msg-card-body" id="appendDiv">
-              <!-- <div id="divStart">
-                <div class="img-cont-msg" id="avatarMe"></div>
-                <div id="msgContainer">
-                  <div id="msgMe"></div>
-                  <span class="msg-time" id="msgTimeMe"></span>
-                </div>
-              </div>
-              <div id="divEnd">
-                <div id="msgContainerSend">
-                  <div id="msgOther"></div>
-                  <span class="msg-time" id="msgTimeOther"></span>
-                </div>
-                <div class="img-cont-msg" id="avatarOther"></div>
-              </div> -->
-            </div>
-            <form id="chat">
-              <div class="card-footer">
+    </div>
+
+    <div id="chatRoom">
+      <div class="container-fluid h-100 mt-4">
+        <div class="row justify-content-center h-100">
+          <div class="col-md-4 col-xl-3 chat">
+            <div class="card mb-sm-3 mb-md-0 contacts-card">
+              <div class="card-header">
                 <div class="input-group">
-                  <div class="input-group-append">
-                    <span class="input-group-text attach-btn">
-                      <i class="fas fa-paperclip"></i>
+                  <input type="text"  
+                    placeholder="Procurar..."
+                    name="search"
+                    class="form-control search">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text search-btn">
+                      <i class="fas fa-search"></i>
                     </span>
                   </div>
-                  <textarea name="message"
-                            id="textareaMessage"
-                            class="form-control type-msg"
-                            placeholder="Digite a sua mensagem..."></textarea>
-                  <div class="input-group-append">
-                    <button type="submit" class="input-group-text send-btn">
-                      <i class="fas fa-location-arrow"></i>
-                    </button>
-                  </div>
                 </div>
               </div>
-            </form>
+              <div class="card-body contacts-body">
+                <ui class="contacts">
+                  <li class="active">
+                    <div class="d-flex bd-highlight">
+                      <div class="img-cont">
+                        <img
+                          src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                          class="rounded-circle user-img"
+                        />
+                        <span class="online-icon"></span>
+                      </div>
+                      <div class="user-info">
+                        <span>Khalid</span>
+                        <p>Kalid is online</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="d-flex bd-highlight">
+                      <div class="img-cont">
+                        <img
+                          src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg"
+                          class="rounded-circle user-img"
+                        />
+                        <span class="online-icon offline"></span>
+                      </div>
+                      <div class="user-info">
+                        <span>Taherah Big</span>
+                        <p>Taherah left 7 mins ago</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="d-flex bd-highlight">
+                      <div class="img-cont">
+                        <img
+                          src="https://i.pinimg.com/originals/ac/b9/90/acb990190ca1ddbb9b20db303375bb58.jpg"
+                          class="rounded-circle user-img"
+                        />
+                        <span class="online-icon"></span>
+                      </div>
+                      <div class="user-info">
+                        <span>Sami Rafi</span>
+                        <p>Sami is online</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="d-flex bd-highlight">
+                      <div class="img-cont">
+                        <img
+                          src="http://profilepicturesdp.com/wp-content/uploads/2018/07/sweet-girl-profile-pictures-9.jpg"
+                          class="rounded-circle user-img"
+                        />
+                        <span class="online-icon offline"></span>
+                      </div>
+                      <div class="user-info">
+                        <span>Nargis Hawa</span>
+                        <p>Nargis left 30 mins ago</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="d-flex bd-highlight">
+                      <div class="img-cont">
+                        <img
+                          src="https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg"
+                          class="rounded-circle user-img"
+                        />
+                        <span class="online-icon offline"></span>
+                      </div>
+                      <div class="user-info">
+                        <span>Rashid Samim</span>
+                        <p>Rashid left 50 mins ago</p>
+                      </div>
+                    </div>
+                  </li>
+                </ui>
+              </div>
+              <div class="card-footer"></div>
+            </div>
+          </div>
+          <div class="col-md-8 col-xl-6 chat">
+            <div class="card">
+              <div class="card-header msg-head">
+                <div class="d-flex bd-highlight">
+                  <div class="img-cont">
+                    <img
+                      src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                      class="rounded-circle user-img"
+                    />
+                    <span class="online-icon"></span>
+                  </div>
+                  <div class="user-info">
+                    <span>Chat with Khalid</span>
+                    <p>1767 Messages</p>
+                  </div>
+                  <div class="video-cam">
+                    <span><i class="fas fa-video"></i></span>
+                    <span><i class="fas fa-phone"></i></span>
+                  </div>
+                </div>
+                <span id="actionMenuBtn"
+                  ><i class="fas fa-ellipsis-v"></i
+                ></span>
+                <div class="action-menu">
+                  <ul>
+                    <li><i class="fas fa-user-circle"></i>Ver Perfil</li>
+                    <li><i class="fas fa-users"></i>Adicionar aos Amigos</li>
+                    <li><i class="fas fa-plus"></i>Adicionar ao Grupo</li>
+                    <li><i class="fas fa-ban"></i>Bloquear</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-body msg-card-body" id="appendDiv"></div>
+              <form id="formChat">
+                <div class="card-footer">
+                  <div class="input-group">
+                    <div class="input-group-append">
+                      <span class="input-group-text attach-btn">
+                        <i class="fas fa-paperclip"></i>
+                      </span>
+                    </div>
+                    <textarea name="message"
+                              id="textareaMessage"
+                              class="form-control type-msg"
+                              placeholder="Digite a sua mensagem..."></textarea>
+                    <div class="input-group-append">
+                      <button type="submit" class="input-group-text send-btn">
+                        <i class="fas fa-location-arrow"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
