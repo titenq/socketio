@@ -259,6 +259,10 @@ body, html {
   display: none;
 }
 
+#chatLogin {
+  display: none;
+}
+
 .card-login {
   height: auto;
   border-radius: 15px !important;

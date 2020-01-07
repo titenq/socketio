@@ -17,7 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
     <title>Chat</title>
   </head>
-  <body>
+  <body onload="getChatUser()">
 
     <div id="chatLogin">
       <div class="container-fluid h-100">
@@ -206,16 +206,12 @@
             <div class="card">
               <div class="card-header msg-head">
                 <div class="d-flex bd-highlight">
-                  <div class="img-cont">
-                    <img
-                      src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                      class="rounded-circle user-img"
-                    />
+                  <div class="img-cont" id="loggedAvatar">
                     <span class="online-icon"></span>
                   </div>
                   <div class="user-info">
-                    <span>Chat with Khalid</span>
-                    <p>1767 Messages</p>
+                    <span id="loggedWith"></span>
+                    <!-- <p>1767 Messages</p> -->
                   </div>
                   <div class="video-cam">
                     <span><i class="fas fa-video"></i></span>
@@ -231,6 +227,7 @@
                     <li><i class="fas fa-users"></i>Adicionar aos Amigos</li>
                     <li><i class="fas fa-plus"></i>Adicionar ao Grupo</li>
                     <li><i class="fas fa-ban"></i>Bloquear</li>
+                    <li onclick="logout()"><i class="fas fa-door-open"></i>Sair</li>
                   </ul>
                 </div>
               </div>

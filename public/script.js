@@ -1,9 +1,30 @@
 // Para que o client se comunique com o socket.io
-let socket = io('ws://localhost:3000');
+let socket = io('http://localhost:3000');
 
 let nick = '';
 let avatar = '';
 let user = {};
+
+function getChatUser() {
+  let userStoraged = localStorage.getItem('chatUser');
+
+  if (userStoraged !== null) {
+    user = JSON.parse(userStoraged);
+    $('#chatRoom').show();
+    $('#loggedWith').append(`Logado como ${user.nick}`);
+    $('#loggedAvatar').append(`<img
+  src="${user.avatar}"
+  class="rounded-circle user-img">`);
+  } else {
+    $('#chatLogin').show();
+  };
+};
+
+// Função para fazer logout e apagar o Local Storage
+function logout() {
+  localStorage.removeItem('chatUser');
+  window.location.href = 'http://localhost:3000';
+};
 
 // Função para renderizar as mensagens na tela
 function renderMessage(message) {
@@ -33,9 +54,8 @@ function renderMessage(message) {
 // Recebendo as mensagens anteriores já enviadas
 socket.on('previousMessage', function(messages) {
   for (message of messages) {
-    console.log(message);
     renderMessage(message);
-  }
+  };
 });
 
 // Recebendo a mensagem enviadas por todos os clientes
@@ -58,11 +78,21 @@ $('#formLogin').submit(function(event) {
     nick: nick,
     avatar: avatar
   };
-  
-  console.log(user);
+
+  // Convertendo o objeto user para String
+  // Para ser gravado no Local Storage
+  let userStorage = JSON.stringify(user);
+
+  // Gravando o objeto user no Local Storage
+  localStorage.setItem('chatUser', userStorage);
 
   $('#chatLogin').hide();
   $('#chatRoom').show();
+
+  $('#loggedWith').append(`Logado como ${user.nick}`);
+  $('#loggedAvatar').append(`<img
+  src="${user.avatar}"
+  class="rounded-circle user-img">`);
 });
 
 // Função para enviar a mensagem do chat para o socket.io
