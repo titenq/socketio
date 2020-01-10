@@ -23,6 +23,7 @@ function getChatUser() {
 // Função para fazer logout e apagar o Local Storage
 function logout() {
   localStorage.removeItem('chatUser');
+  socket.emit('userLogout', user);
   window.location.href = 'http://localhost:3000';
 };
 
@@ -51,6 +52,25 @@ function renderMessage(message) {
   } 
 };
 
+// Função para renderizar os usuários logados
+function renderUsersLogged(user) {
+  $('#usersInChat').append(`<li class="active">
+  <div class="d-flex bd-highlight">
+    <div class="img-cont">
+      <img
+        src="${user.avatar}"
+        class="rounded-circle user-img"
+      />
+      <span class="online-icon"></span>
+    </div>
+    <div class="user-info">
+      <span>${user.nick}</span>
+      <p>${user.nick} está online</p>
+    </div>
+  </div>
+</li>`);
+};
+
 // Recebendo as mensagens anteriores já enviadas
 socket.on('previousMessage', function(messages) {
   for (message of messages) {
@@ -61,6 +81,13 @@ socket.on('previousMessage', function(messages) {
 // Recebendo a mensagem enviadas por todos os clientes
 socket.on('receivedMessage', function(message) {
   renderMessage(message);
+});
+
+// Recebendo os usuários anteriores já enviados
+socket.on('previousUser', function(users) {
+  for (user of users) {
+    renderUsersLogged(user);
+  };
 });
 
 // Função para receber o apelido e avatar
@@ -90,9 +117,15 @@ $('#formLogin').submit(function(event) {
   $('#chatRoom').show();
 
   $('#loggedWith').append(`Logado como ${user.nick}`);
+  
   $('#loggedAvatar').append(`<img
   src="${user.avatar}"
   class="rounded-circle user-img">`);
+
+  renderUsersLogged(user);
+
+  // Enviando o userStorage para o servidor como userLogged
+  socket.emit('usersLogged', user);
 });
 
 // Função para enviar a mensagem do chat para o socket.io
