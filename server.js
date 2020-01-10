@@ -65,6 +65,7 @@ io.on('connection', socket => {
 });
 
 // ouvindo a porta 3000
-server.listen(process.env.port || 8080, () => {
-  console.log(`Servidor rodando na porta ${process.env.port}`);
+let port = process.env.port || 8080;
+server.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
 });
