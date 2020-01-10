@@ -9,7 +9,6 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    // "build": "webpack",
     "heroku-postbuild": "ng build --prod",
     "dev": "nodemon -e * server.js"
   },
