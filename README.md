@@ -1,4 +1,4 @@
-![](https://img.shields.io/github/stars/titenq/socketio.svg) ![](https://img.shields.io/github/forks/titenq/socketio.svg) ![]](https://img.shields.io/github/issues/titenq/socketio.svg) 
+![](https://img.shields.io/github/stars/titenq/socketio.svg) ![](https://img.shields.io/github/forks/titenq/socketio.svg) ![](https://img.shields.io/github/issues/titenq/socketio.svg) 
 
 ## Chat
 
@@ -10,7 +10,7 @@
 ### Demo
 [https://socketio-nodejs.herokuapp.com](https://socketio-nodejs.herokuapp.com "https://socketio-nodejs.herokuapp.com")
 
-###Screenshots
+### Screenshots
 > Tela de login.
 
 ![](https://github.com/titenq/socketio/blob/master/public/assets/tela-login.jpg?raw=true)
