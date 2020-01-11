@@ -24,7 +24,7 @@ function getChatUser() {
 function logout() {
   localStorage.removeItem('chatUser');
   socket.emit('userLogout', user);
-  window.location.href = 'http://localhost:3000';
+  window.location.href = 'https://socketio-nodejs.herokuapp.com';
 };
 
 // Função para renderizar as mensagens na tela
